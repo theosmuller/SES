@@ -1,2 +1,1 @@
-# ses
-Smart Enrollment System (SES)
+# Smart Enrollment System (SES)
