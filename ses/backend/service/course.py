@@ -1,5 +1,4 @@
-from typing import List
-from model.Course import Course
+from ..model.course import Course
 
 class CourseService:
     def __init__(self):
@@ -10,4 +9,4 @@ class CourseService:
         for course in self.courses:
             if course.name == course_name:
                 return course
-            return None
+        raise ValueError("Course not found")
