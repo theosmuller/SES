@@ -1,6 +1,6 @@
 from typing import Optional
 from fastapi import APIRouter
-from ..service.course import CourseService
+from ..service.course_service import CourseService
 from ..model.course import Course
 
 router = APIRouter()
@@ -18,6 +18,6 @@ def get_course(course_id: int, q: Optional[str] = None):
 def get_course_by_name(course_name: str):
     return courseService.get_course_by_name(course_name)
     
-@router.put("/courses/{course_id}")
-def add_course(course_id: int, course: Course):
-    return {"course_name": course.name, "course_id": course_id}
+@router.post("/courses")
+def add_course(course: Course):
+    return courseService.add_course(course)
