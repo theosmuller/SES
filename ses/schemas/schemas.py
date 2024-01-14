@@ -2,6 +2,7 @@ from pydantic import BaseModel, computed_field
 from hashlib import sha256
 from datetime import datetime
 from typing import TypeVar
+from typing import Optional
 
 class Entity(BaseModel):         # MyPy thinks this is wrong but it is a bug!
     @computed_field(alias="_id") # type: ignore
@@ -13,7 +14,10 @@ class Entity(BaseModel):         # MyPy thinks this is wrong but it is a bug!
 EntityT = TypeVar("EntityT", bound=Entity)
 
 class Course(Entity):
-    pass
+    name: str
+    attendants: int
+    average_grade: float
+    is_available: Optional[bool] = None
 
 
 class University(Entity):
@@ -40,20 +44,21 @@ class UserProfile(Entity):
     role: Role
 
 
+class Group(Entity):
+    name: str
+    max_students: int
+    students: list[Student]
+    professor: Professor
+    remote: bool
+
+
 class UniversityClass(Entity):
     name: str
-    students: list[Student]
     course: Course
     offered_to: list[Course]
     requirements: list["UniversityClass"]
     semester: int
-
-
-class Group(Entity):
-    name: str
-    max_students: int
-    professor: Professor
-    remote: bool
+    groups: list[Group]
 
 
 class Location(Entity):

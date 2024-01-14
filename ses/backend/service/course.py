@@ -1,5 +1,4 @@
-from ..model.course import Course
-from ses.backend.pymongo_get_database import get_database
+from ses.schemas.schemas import Course
 from ses.core.repository import MongoRepo
 
 class CourseService:
@@ -16,4 +15,6 @@ class CourseService:
     
     def add_course(self, course: Course):
         self.repo.add(course)
+
+    
     
