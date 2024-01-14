@@ -12,7 +12,7 @@ class CourseService:
     )
 
     def get_course_by_name(self, course_name: str) -> Course:
-        return self.repo.get_by([Course.name, course_name])
+        return self.repo.get_by({"name": course_name})
     
     def add_course(self, course: Course):
         self.repo.add(course)
