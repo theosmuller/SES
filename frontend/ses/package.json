@@ -6,12 +6,18 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "vue-tsc --noEmit && vite --check",
+    "serve": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.3.11"
+    "@types/vue-router": "^2.0.0",
+    "vue": "^3.3.11",
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@babel/types": "^7.23.6",
+    "@types/node": "^20.11.6",
     "@vitejs/plugin-vue": "^4.5.2",
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
