@@ -6,9 +6,6 @@ from ..model.course import Course
 router = APIRouter()
 courseService = CourseService()
 
-@router.get("/")
-def read_root():
-    return {"Hello": "World"}
 
 @router.get("/courses/{course_id}")
 def get_course(course_id: int, q: Optional[str] = None):
