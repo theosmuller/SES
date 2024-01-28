@@ -14,3 +14,10 @@ With the virtual environment, do:
 python3.12 -m ses.backend
 ```
 
+## Running frontend
+In frontend/ses/src, do:
+```bash
+npm install
+npm run dev
+```
+
