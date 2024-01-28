@@ -12,7 +12,6 @@
       <div class="side-menu">
         <div
           class="menu-item"
-          :class="{ 'selected': isSearchEditClassSelected }"
           @click="toggleButton('search-edit-class')"
           data-button="search-edit-class"
         >
@@ -20,7 +19,6 @@
         </div>
         <div
           class="menu-item"
-          :class="{ 'selected': isAddClassSelected }"
           @click="toggleButton('add-class')"
           data-button="add-class"
         >
@@ -28,7 +26,6 @@
         </div>
         <div
           class="menu-item"
-          :class="{ 'selected': isSetEnrollmentDatesSelected }"
           @click="toggleButton('set-enrollment-dates')"
           data-button="set-enrollment-dates"
         >
@@ -36,15 +33,19 @@
         </div>
         <div
           class="menu-item disabled"
-          :class="{ 'selected': isSetupUniversitySelected }"
           data-button="setup-university"
         >
           <i class="pi pi-cog"></i> SETUP UNIVERSITY AND COURSE
         </div>
       </div>
       <transition name="fade" mode="out-in">
-        <div class="main-content" :key="isAddClassSelected">
-          <div v-if="isAddClassSelected">
+        <div class="main-content" :key="selectedMenu">
+          <div v-if="selectedMenu == 1">
+            <div class="add-class-menu">
+              <AddClassMenu />
+            </div>
+          </div>
+          <div v-if="selectedMenu == 2">
             <div class="add-class-menu">
               <AddClassMenu />
             </div>
@@ -62,20 +63,20 @@
   const router = useRouter();
   const collegeCourseName = ref('UFRGS - Ciência da Computação');
   const selectedButton = ref('');
-  
-  const isAddClassSelected = ref(false);
-  
+  const selectedMenu = ref(-1);
+
   const toggleButton = (button: string) => {
     selectedButton.value = button;
   
     if (button === 'add-class') {
-      isAddClassSelected.value = true;
+        selectedMenu.value = 1;
     } else {
-      isAddClassSelected.value = false;
-    }
-  
-    if (buttonActions[selectedButton.value]) {
-      buttonActions[selectedButton.value]();
+        if (button === 'set-enrollment-dates') {
+            selectedMenu.value = 2;
+            }
+        else {
+            selectedMenu.value = -1;
+        }
     }
   };
   

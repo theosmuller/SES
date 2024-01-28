@@ -21,16 +21,18 @@
       <div class="form-field">
         <label for="prerequisites">Pre-requisites:</label>
         <div v-for="(prerequisite, index) in prerequisites" :key="index" class="prerequisite-item">
-          <span>{{ prerequisite }}</span>
-          <button @click="removePrerequisite(index)">x</button>
+          <button class="item-content" @click="removePrerequisite(index)">
+            {{ prerequisite }} x
+          </button>
         </div>
         <button @click="addPrerequisite">+</button>
       </div>
       <div class="form-field">
         <label for="classOptions">Class options:</label>
         <div v-for="(option, index) in classOptions" :key="index" class="class-option-item">
-          <span>{{ option }}</span>
-          <button @click="removeClassOption(index)">x</button>
+          <button class="item-content" @click="removeClassOption(index)">
+            {{ option }} x
+          </button>
         </div>
         <button @click="addClassOption">+</button>
       </div>
@@ -49,7 +51,7 @@ const prerequisites = ref([]);
 const classOptions = ref([]);
 
 const addPrerequisite = () => {
-  prerequisites.value.push('');
+  prerequisites.value.push('A LOT OF TEXT ABASDABADSSAF');
 };
 
 const removePrerequisite = (index) => {
@@ -57,7 +59,7 @@ const removePrerequisite = (index) => {
 };
 
 const addClassOption = () => {
-  classOptions.value.push('');
+  classOptions.value.push('test');
 };
 
 const removeClassOption = (index) => {
@@ -127,9 +129,11 @@ const removeClassOption = (index) => {
 
 }
 
+
 .form-field button {
-  width: 25px;
-  height: 25px;
+  width: fit-content;
+  height: fit-content;
+  min-height: 25px;
   margin: 15px 15px 15px 15px;
   position: relative;
   -webkit-border-radius: 200px;
@@ -137,6 +141,7 @@ const removeClassOption = (index) => {
   -ms-border-radius: 200px;
   -o-border-radius: 200px;
   border-radius: 200px;
+  margin-left: auto;
 }
 
 </style>
