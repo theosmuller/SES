@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Login from './views/LoginPage.vue';
+import Home from './views/HomePage.vue';
 import Admin from './views/AdminPage.vue';
+import Cookies from 'js-cookie';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
-    component: Login
+    component: Home
   },
   {
     path: '/login',
@@ -27,7 +29,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = true; // replace this with real authentication check
+  const isAuthenticated = Cookies.get('auth'); // replace this with real authentication check
   if (to.path !== '/login' && !isAuthenticated) next({ path: '/login' })
   else next()
 })

@@ -9,10 +9,10 @@
         </option>
       </select>
       <label for="username" class="form-label">Username</label>
-      <input type="text" id="username" class="form-input" placeholder="Enter your username" required/>
+      <input type="text" id="username" class="form-input" placeholder="Enter your username" v-model="username" required/>
 
       <label for="password" class="form-label">Password</label>
-      <input type="password" id="password" class="form-input" placeholder="Enter your password" required/>
+      <input type="password" id="password" class="form-input" placeholder="Enter your password" v-model="password" required/>
       <button class="login-button">Login</button>
     </form>
   </div>
@@ -20,6 +20,7 @@
 
 <script>
 import axios from 'axios'
+import Cookies from 'js-cookie'
 export default {
   data() {
       return {
@@ -30,7 +31,12 @@ export default {
   },
   methods: {
       login() {
-          alert(`Username: ${this.username}\nPassword: ${this.password}`);
+          if(this.username == 'admin' && this.password == 'admin') {
+              Cookies.set('auth', 'admin')
+              this.$router.push('/home');
+          } else {
+              alert('Invalid credentials!');
+          }
       },
   },
   created() {
