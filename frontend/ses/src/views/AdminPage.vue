@@ -83,6 +83,10 @@ const resetSelectedClasses = () => {
         item.classList.remove('selected');
     });
 };
+
+const exitAdminTools = () => {
+    router.push('/login');
+};
 </script>
   
 <style scoped>
