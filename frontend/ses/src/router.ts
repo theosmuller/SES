@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Login from './views/LoginPage.vue';
+import Admin from './views/AdminPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -11,6 +12,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/admin',
+    name:'Admin Tools',
+    component: Admin
   }
 ];
 
@@ -21,7 +27,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = false; // replace this with real authentication check
+  const isAuthenticated = true; // replace this with real authentication check
   if (to.path !== '/login' && !isAuthenticated) next({ path: '/login' })
   else next()
 })
