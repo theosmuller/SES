@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Login from './views/LoginPage.vue';
 import Home from './views/HomePage.vue';
+import Admin from './views/AdminPage.vue';
 import Cookies from 'js-cookie';
 
 const routes: Array<RouteRecordRaw> = [
@@ -13,6 +14,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/admin',
+    name:'Admin Tools',
+    component: Admin
   }
 ];
 
