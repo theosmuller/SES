@@ -36,12 +36,16 @@
         </div>
         <button @click="addClassOption">+</button>
       </div>
+      <div>
+        <button @click="submitForm">Submit</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import axios from 'axios'
 
 const className = ref('');
 const classCode = ref('');
@@ -51,7 +55,10 @@ const prerequisites = ref([]);
 const classOptions = ref([]);
 
 const addPrerequisite = () => {
-  prerequisites.value.push('A LOT OF TEXT ABASDABADSSAF');
+  const userInput = prompt('Enter the prerequisite:');
+  if (userInput) {
+    prerequisites.value.push(userInput);
+  }
 };
 
 const removePrerequisite = (index) => {
@@ -59,11 +66,59 @@ const removePrerequisite = (index) => {
 };
 
 const addClassOption = () => {
-  classOptions.value.push('test');
+  const userInput = prompt('Enter the class option:');
+  if (userInput) {
+    classOptions.value.push(userInput);
+  }
 };
 
 const removeClassOption = (index) => {
   classOptions.value.splice(index, 1);
+};
+
+const submitForm = () => {
+  if (!validateForm()) {
+    alert('Please fill in all fields and ensure credits is a positive number.');
+    return;
+  }
+
+  const formData = {
+    className: className.value,
+    classCode: classCode.value,
+    offerToOtherCourses: offerToOtherCourses.value,
+    credits: credits.value,
+    prerequisites: prerequisites.value,
+    classOptions: classOptions.value,
+  };
+
+
+  axios.post('http://localhost:8000/classes', {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+    .then(response => {
+      alert(response);
+      resetForm();
+    })
+    .catch((error) => {
+      alert('Error:' + error + '\nSubmitted data:' + JSON.stringify(formData));
+    });
+
+};
+
+const validateForm = () => {
+  return className.value && classCode.value && credits.value >= 0;
+};
+
+const resetForm = () => {
+  className.value = '';
+  classCode.value = '';
+  offerToOtherCourses.value = false;
+  credits.value = 0;
+  prerequisites.value = [];
+  classOptions.value = [];
 };
 </script>
 
@@ -92,7 +147,8 @@ const removeClassOption = (index) => {
 }
 
 .form-container {
-  max-width: 400px !important; /* Set your desired maximum width */
+  max-width: 400px !important;
+  /* Set your desired maximum width */
 }
 
 .form-field {
@@ -120,15 +176,10 @@ const removeClassOption = (index) => {
 }
 
 .prerequisite-item,
-.class-option-item {
-
-}
+.class-option-item {}
 
 .prerequisite-item button,
-.class-option-item button {
-
-}
-
+.class-option-item button {}
 
 .form-field button {
   width: fit-content;
@@ -144,4 +195,7 @@ const removeClassOption = (index) => {
   margin-left: auto;
 }
 
+button {
+  cursor: pointer;
+}
 </style>
