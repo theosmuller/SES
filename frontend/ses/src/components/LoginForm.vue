@@ -33,9 +33,14 @@ export default {
       login() {
           if(this.username == 'admin' && this.password == 'admin') {
               Cookies.set('auth', 'admin')
-              this.$router.push('/admin');
+              this.$router.push('/home');
           } else {
-              alert('Invalid credentials!');
+              if(this.username == 'admin2' && this.password == 'admin') {
+                Cookies.set('auth', 'admin')
+                this.$router.push('/admin');
+              } else {
+                alert('Invalid credentials!');
+              }
           }
       },
   },
