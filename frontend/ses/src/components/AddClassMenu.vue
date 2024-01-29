@@ -92,7 +92,7 @@ const submitForm = () => {
   };
 
 
-  axios.post('http://localhost:8000/classes', {
+  axios.post('http://localhost:8000/university/1/course', {
     headers: {
       'Content-Type': 'application/json',
     },
